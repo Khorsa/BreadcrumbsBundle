@@ -16,7 +16,7 @@ class Breadcrumbs
      * @param string $name название страницы
      * @return $this
      */
-    public function append(string $route, string $name): self
+    public function append(string $path, string $name): self
     {
         $this->breadcrumbs[] = $this->formCrumb($path, $name);
         return $this;
@@ -39,7 +39,7 @@ class Breadcrumbs
 		return [
 			'path' => $path, 
 			'label' => $name, 
-			'uid' => md5($route . $name)
+			'uid' => md5($path . $name)
 			];
 	}
 	
