@@ -18,7 +18,7 @@ class Breadcrumbs
      */
     public function append(string $route, string $name): self
     {
-        $this->breadcrumbs[] = ['path' => $route, 'label' => $name];
+        $this->breadcrumbs[] = $this->formCrumb($path, $name);
         return $this;
     }
 
@@ -29,9 +29,20 @@ class Breadcrumbs
      */
     public function prepend(string $path, string $name): self
     {
-        array_unshift($this->breadcrumbs, ['path' => $path, 'label' => $name]);
+        array_unshift($this->breadcrumbs, $this->formCrumb($path, $name));
         return $this;
     }
+	
+	
+	private function formCrumb(string $path, string $name): array
+	{
+		return [
+			'path' => $path, 
+			'label' => $name, 
+			'uid' => md5($route . $name)
+			];
+	}
+	
 
     /**
      * @return array
